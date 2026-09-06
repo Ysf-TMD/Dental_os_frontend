@@ -39,6 +39,7 @@ export function PatientsPage() {
     endpoint: ENDPOINTS.patients,
     initialPageSize: 10,
   });
+  console.log("patient data " , data)
 
   const [deleteModal, setDeleteModal] = useState<{ open: boolean; id: number | null }>({
     open: false,

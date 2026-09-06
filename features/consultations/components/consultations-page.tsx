@@ -3,12 +3,19 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { patients } from "@/lib/mock-data";
+
 import { Plus, Stethoscope } from "lucide-react";
+import {useDataTable} from "@/lib/hooks/use-data-table";
+import type {Patient} from "@/features/patients/types";
+import {ENDPOINTS} from "@/lib/api/endpoints";
 
 const motifs = ["Contrôle annuel", "Douleur dent 36", "Suite traitement carie", "Saignement gingival", "Contrôle ortho", "Pose couronne", "Détartrage", "Avis implant"];
 
 export function ConsultationsPage() {
+    const { data: patients, loading, error, setPage, setPageSize, setSearch, setSort, refresh, meta } = useDataTable<Patient>({
+        endpoint: ENDPOINTS.patients,
+        initialPageSize: 10,
+    });
   return (
     <div className="space-y-6 max-w-[1500px] mx-auto">
       <div className="flex flex-wrap items-center justify-between gap-3">

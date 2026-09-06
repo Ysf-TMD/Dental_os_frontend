@@ -5,8 +5,19 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 import { FileSpreadsheet, Plus, ArrowRight } from "lucide-react";
+import {usePatients} from "@/features/patients/hooks/use-patients";
+import {ENDPOINTS} from "@/lib/api/endpoints";
+import {useDataTable} from "@/lib/hooks/use-data-table";
+import type {Patient} from "@/features/patients/types";
 
 export function DevisPage() {
+
+    const { data : patients , loading, error, setPage, setPageSize, setSearch, setSort, refresh, meta } = useDataTable<Patient>({
+        endpoint: ENDPOINTS.patients,
+        initialPageSize: 10,
+    });
+
+    console.log("patients" , patients)
   return (
     <div className="space-y-6 max-w-[1500px] mx-auto">
       <div className="flex flex-wrap items-center justify-between gap-3">

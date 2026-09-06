@@ -47,7 +47,6 @@ export function DynamicNavigation() {
       });
     });
 
-    console.log('Grouped pages:', grouped);
     setGroupedPages(grouped);
 
     // Open all groups by default

@@ -4,6 +4,9 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Plus } from "lucide-react";
+import {useDataTable} from "@/lib/hooks/use-data-table";
+import type {Patient} from "@/features/patients/types";
+import {ENDPOINTS} from "@/lib/api/endpoints";
 
 
 const types = [
@@ -23,7 +26,13 @@ const statusStyle: Record<string, string> = {
   "Terminé": "bg-success/10 text-success border-success/30",
 };
 
+
 export function TraitementsPage() {
+
+  const { data: patients, loading, error, setPage, setPageSize, setSearch, setSort, refresh, meta } = useDataTable<Patient>({
+    endpoint: ENDPOINTS.patients,
+    initialPageSize: 10,
+  });
   return (
     <div className="space-y-6 max-w-[1500px] mx-auto">
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -44,7 +53,7 @@ export function TraitementsPage() {
               <div className="flex items-start justify-between gap-2 mb-3">
                 <div>
                   <div className="font-semibold">{t.name}</div>
-                  <div className="text-xs text-muted-foreground mt-0.5">{p.firstName} {p.lastName}</div>
+                  <div className="text-xs text-muted-foreground mt-0.5">{p?.firstName} {p?.lastName}</div>
                 </div>
                 <Badge variant="outline" className={statusStyle[t.status]}>{t.status}</Badge>
               </div>
